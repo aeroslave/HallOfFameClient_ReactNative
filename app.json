@@ -1,11 +1,10 @@
 {
   "expo": {
-    "name": "Blank Template",
+    "name": "HallOfFameClient_RN",
     "slug": "HallOfFameClient_React",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
-      "ios",
       "android",
       "web"
     ],
@@ -23,8 +22,11 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    }
+	"android": {
+      "package": "com.yourcompany.yourappname",
+      "versionCode": 1
+    },
+    "description": "",
+    "githubUrl": "https://github.com/aeroslave/HallOfFameClient_ReactNative"
   }
 }
