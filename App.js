@@ -8,6 +8,7 @@ import {
   View,
   TouchableOpacity,
   Button,
+  Alert
 } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -32,7 +33,7 @@ export default App;
 class PersonListScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isLoading: true, dataSource: null, refreshing: false };
+    this.state = { isLoading: false, dataSource: null, refreshing: false, url: '' };
   }
   
   _onPress(item) {
@@ -55,8 +56,21 @@ class PersonListScreen extends React.Component {
     );
   };
 
+
+  renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          backgroundColor: "#CED0CE",
+          marginRight: "5%"
+        }}
+      />
+    );
+  };
+
   getPersonList() {
-    return fetch('http://192.168.0.105:52480/api/persons')
+    return fetch('http://' + this.state.url + '/api/persons')
       .then(response => response.json())
       .then(responseJson => {
         this.setState(
@@ -74,7 +88,7 @@ class PersonListScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.getPersonList();
+    //this.getPersonList(this.state.url);
   }
 
   render() {
@@ -88,12 +102,22 @@ class PersonListScreen extends React.Component {
 
     return (
       <View style={styles.container}>
+        <View style={{margin:5 }}>
+          <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1, margin:5}}
+            onChangeText={url => this.setState({ url })}
+            value={this.state.url}
+          />
+          <Button title="Соединение"
+          onPress={() => this.getPersonList()}/>
+        </View>
         <FlatList
           data={this.state.dataSource}
           renderItem={this.renderItem}
           keyExtractor={({ id }, index) => id}
           refreshing={this.state.refreshing}
           onRefresh={this._handleRefresh}
+          ItemSeparatorComponent={this.renderSeparator}          
         />
       </View>
     );
