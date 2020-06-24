@@ -18,8 +18,8 @@ class PersonScreen extends React.Component {
     };
   
     render() {
-      const name = this.props.route.params.person.name;
-      const skills = this.props.route.params.person.skills;
+      let name = this.props.route.params.person.name;
+      let skills = this.props.route.params.person.skills;
   
       return (
         <View style={styles.container}>

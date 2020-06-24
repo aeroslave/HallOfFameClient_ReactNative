@@ -69,10 +69,6 @@ class PersonListScreen extends React.Component {
       });
   }
 
-  componentDidMount() {
-    //this.getPersonList(this.state.url);
-  }
-
   render() {
     if (this.state.isLoading) {
       return (
